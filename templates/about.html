@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: #cfcece;
+        }
+
+        html {
+            box-sizing: border-box;
+        }
+
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #0d2327;
+            padding: 20px;
+            width: 100%; /* Make the navbar fit the full width of the page */
+            box-sizing: border-box; /* Ensure padding and border are included in the width */
+            position: relative; /* Ensure the shadow is positioned relative to the navbar */
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4); /* Subtle shadow */
+        }
+
+        .logo {
+            height: 25px; /* Adjust the height as needed */
+            width: auto;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: #639292;
+            text-decoration: none;
+            font-size: 18px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-icon {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            color: #254e58;
+            filter: invert(0.4) sepia(0.3) saturate(1.5) hue-rotate(180deg) brightness(0.9);
+        }
+
+        .about-section {
+            padding: 50px;
+            text-align: center;
+            background-color: #112d32;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-section h1 {
+            margin: 0;
+            font-size: 40px;
+            color: #addad9;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .about-section .welcome-message {
+            font-size: 18px; /* Font size for "Welcome to our Test Case Generator platform!" */
+            font-weight: bold;
+            margin-bottom: 50px;
+            color: #88bdbc;
+            font-family: monospace;
+        }
+
+        .about-section .highlight {
+            color: #cec6b9; /* Change this color as needed */
+        }
+
+        .extra {
+            padding: 3px 15px;
+            background-color: #254e58; /* Keep the background color the same */
+            color: #b6dedd; /* Text color */
+            margin-top: -10px;
+            font-size: 15px; /* Adjusted font size for the mission statement */
+            line-height: 1.6; /* Better readability */
+            max-width: 1100px;
+            border-radius: 30px; /* Border radius for better readability */
+            text-align: center;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .extra p {
+            margin-bottom: 10px; /* Margin for spacing between paragraphs */
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 50px;
+            font-size: 28px;
+            color: #333;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between; /* Distribute space between items */
+            gap: 16px; /* Add space between the boxes */
+            padding: 0 16px; /* Add padding to the row */
+        }
+
+        .column {
+            flex: 1 1 24%; /* Flex-grow, flex-shrink, and flex-basis to fit in one row */
+            max-width: 24%; /* Ensure columns don't grow larger */
+            margin-bottom: 16px;
+            position: relative; /* Required for absolute positioning of the numbers */
+        }
+
+        .column::before {
+            content: attr(data-number);
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4f4a41;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 50%;
+            font-size: 20px;
+            font-family: monospace;
+            font-weight: bold;
+            box-shadow: 0 5px 10px 2px rgba(97, 96, 96, 0.4);
+        }
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            background: #afa695;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 180px; /* Default height */
+            color: #000000;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 15px;
+        }
+
+        .card h2 {
+            font-size: 19px;
+            color: #312f2d;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .card p {
+            text-align: justify; /* Justify the paragraph text */
+            text-justify: inter-word; /* Optional: Adjust the spacing between words for justification */
+        }
+
+        .card img {
+            width: 100%;
+        }
+
+        .container {
+            padding: 0 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/welcome"><img src="{{ url_for('static', filename='Images/white-logo.png') }}" alt="Logo" class="logo"></a>
+        <ul>
+            <li><a href="/welcome">Test Case Generator</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/profile"><img src="{{ url_for('static', filename='Images/Profile.png') }}" alt="" class="profile-icon"></a></li>
+        </ul>
+    </div>
+    <div class="about-section">
+        <h1>About Us</h1>
+        <p class="welcome-message">Welcome to our <span class="highlight">Test Case Generator</span> platform!</p>
+        <div class="extra">
+            <p>Our mission is to simplify and enhance the testing process for your company's products and services.</p>
+            <p>We understand that developing a high-quality product involves thorough and systematic testing to ensure it meets the highest standards.</p>
+            <p>That's where we come in.</p>
+        </div>
+    </div>
+
+    <h2>How It Works</h2>
+    <div class="row">
+        <div class="column" data-number="1"> <!-- Add data-number attribute for each box -->
+            <div class="card">
+                <div class="container">
+                    <h2>Upload Your Business Documents</h2>
+                    <p>Begin by uploading your business documents using the form on our homepage. Use the checkboxes to select the types of test cases you need.</p>
+                </div>
+            </div>
+        </div>
+        <div class="column" data-number="2"> <!-- Add data-number attribute for each box -->
+            <div class="card">
+                <div class="container">
+                    <h2>Automatic Analysis with ChatGPT</h2>
+                    <p>Once uploaded, your documents are processed by ChatGPT, to generate a comprehensive set of test cases based on the provided details.</p>
+                </div>
+            </div>
+        </div>
+        <div class="column" data-number="3"> <!-- Add data-number attribute for each box -->
+            <div class="card">
+                <div class="container">
+                    <h2>Organized Test Cases in Excel</h2>
+                    <p>Generated test cases are structured into a clear table and converted into an Excel spreadsheet, ensuring easy management and thorough evaluation.</p>
+                </div>
+            </div>
+        </div>
+        <div class="column" data-number="4"> <!-- Add data-number attribute for each box -->
+            <div class="card">
+                <div class="container">
+                    <h2>Download Your File</h2>
+                    <p>Finally, the Excel file is made available for download. You will receive a well-organized document ready for you to use in your testing process.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Case Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body, html {
+            background-color: #88bdbc;
+            height: 100vh; /* Set the height to viewport height */
+            margin: 0;
+            padding: 0 20px;
+            font-family: sans-serif;
+            color: #26283c;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: #254e58;
+            text-decoration: none;
+            font-size: 18px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .navbar a.logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 25px; /* Adjust the height as needed */
+            width: auto;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #6e9e9e;
+            padding: 18px;
+            height: fit-content;
+            width: 100%; /* Full width */
+            position: absolute; /* Position the navbar at the top */
+            top: 0; /* Align to the top of the viewport */
+            left: 0; /* Align to the left of the viewport */
+            box-sizing: border-box; /* Include padding in the width calculation */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-icon {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            filter: sepia(100%) saturate(1000%) hue-rotate(180deg) brightness(90%) contrast(80%);        }
+
+        h1 {
+            margin-top: 130px; /* Increase top margin to make space for the navbar */
+            font-size: 50px;
+            margin-bottom: 30px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .sub-heading {
+            margin-top: 20px;
+            font-family: monospace;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .file-name {
+            margin-left: 10px;
+            font-size: 13px;
+            color: #333;
+            font-weight: bold;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .box-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 600px; /* Increased max-width to allow for more space */
+        }
+
+        .box {
+            background-color: #CFCECE;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            height: 40px;
+        }
+
+        .box-70 {
+            width: 65%;
+            display: flex; /* Use flex layout */
+            align-items: center; /* Center items vertically */
+            gap: 10px;
+            text-align: left; /* Aligns the content to the left */
+        }
+
+        .box-70 input[type="file"] {
+            display: none;
+        }
+
+        .box-70 .upload-button {
+            width: 40%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.5);
+            background-color: #6e6658;
+            padding: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            color: white;
+            font-family: monospace;
+            font-size: 15px;
+        }
+
+        .box-70 .upload-button:hover {
+            box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.6);
+            background-color: #4f4a41;
+        }
+
+        .box-70 i {
+            margin-left: 8px;
+            color: #112d32;
+        }
+
+        .box-30 {
+            width: 35%;
+            height: 25px;
+            margin-bottom: 5px;
+            margin-top: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: top;
+            text-align: left;
+            font-size: small;
+        }
+        .box-30 ul{
+            padding: 0;
+            text-wrap: nowrap;
+            margin-top: 5%;
+        }
+        .box-30 li{ 
+            margin-top: 5px;
+        }
+
+        .checkthebox-req {
+            font-size: 20px;
+            font-family: Georgia;
+            margin-top: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 300px;
+        }
+
+        button {
+            font-family: monospace;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #254e58;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        button:hover {
+            background-color: #112d32;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        #response {
+            margin-top: 20px;
+        }
+
+        .quantity-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .quantity-container label {
+            display: flex;
+            align-items: center;
+            color: #000000;
+            gap: 10px;
+            padding-right: 20px;
+            font-family: 'verdana';
+            font-size: 15px;
+        }
+
+        .quantity-container input[type="number"] {
+            width: 40px;
+            height: 10px;
+            font-size: 14px;
+            padding: 5px;
+            color: #000000;
+        }
+
+        .checkbox-row {
+            display: block;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 100%;
+            margin-top: 10px;
+            margin-left: 20px;
+            margin-bottom: 30px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #000000;
+            margin-right: 30px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .flash-messages {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .flash-messages .message {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .flash-messages .message.success {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .flash-messages .message.error {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .button-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between the button and spinner */
+        }
+
+        .spinner {
+            display: none; /* Initially hidden */
+            width: 20px;
+            height: 20px;
+            border: 3px solid #938979; /* Light grey background */
+            border-top: 3px solid #433f38; /* Blue spinner */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .download-link {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+            background-color: #6e6658;
+            margin-left: 40.9%;
+            font-size: 16px;
+        }
+
+        .download-link:hover {
+            background-color: #4f4a41;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/welcome"><img src="{{ url_for('static', filename='Images/logo.png') }}" alt="Logo" class="logo"></a>
+        <ul>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/profile"><img src="{{ url_for('static', filename='Images/Profile.png') }}" alt="" class="profile-icon"></a></li>
+        </ul>
+    </div>
+    
+    
+    <h1>TEST CASE GENERATOR</h1>
+    <p class="sub-heading">Upload your Business Documents here ↓</p>
+    
+    <!-- Flash Messages -->
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">
+        <!-- Hidden field for user_id -->
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+
+        <div class="box-container">
+            <div class="box box-70">
+                <input type="file" name="file" id="file" required>
+                <label for="file" class="upload-button">Choose File <i class="fas fa-upload"></i></label>
+                <span id="file-name" class="file-name">No file chosen</span>
+            </div>
+            <div class="box box-30">
+                <ul>
+                    <li><a href="#" onclick="alert('Supported file types:\n.c .cs .cpp .doc .docx .html .java .json .md .pdf .php .pptx .py .rb .tex .txt\n.css .js .sh .ts'); return false;">Supported file types</a></li>
+                    <li>Max File Size allowed: 256 MB</li>
+                </ul>
+            </div>
+        </div>
+
+        <b class="checkthebox-req">↓ Choose the given options for the types of test cases you want to generate ↓</b>
+
+        <div class="checkbox-row">
+            <div class="quantity-container">
+                <label for="quantity5">
+                    Minimum No of Cases
+                    <input type="number" id="quantity5" name="quantity5" min="0" value="0">
+                </label>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="positive" name="positive" value="Positive scenario Test Cases">
+                        Positive Scenario Test Cases
+                    </label>
+                    <label>
+                        <input type="checkbox" id="exception" name="exception" value="Exception Scenario Test Cases">
+                        Exception Scenarios Test Cases
+                    </label>
+                </div>
+            </div>
+
+            <div class="quantity-container">
+                <label for="quantity6">
+                    Maximum No of Cases
+                    <input type="number" id="quantity6" name="quantity6" min="0" value="0">
+                </label>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="negative" name="negative" value="Negative Scenario Test Cases">
+                        Negative Scenario Test Cases
+                    </label>
+                    <label>
+                        <input type="checkbox" id="error" name="error" value="Error Handling Test Cases">
+                        Error Handling Test Cases
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <button type="submit">Generate Excel File</button>
+            <div class="spinner" id="loading-spinner"></div>
+        </div>
+    </form>
+
+    <!-- Display the download link if available -->
+    {% if download_link %}
+        <div>
+            <a href="{{ download_link }}" download><button class="download-link">Download Generated Test Cases</button></a>
+        </div>
+    {% endif %}
+
+    <div id="response"></div>
+    <script>
+        document.getElementById('file').addEventListener('change', function() {
+            var fileName = this.files[0] ? this.files[0].name : 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        });
+
+        document.getElementById('upload-form').addEventListener('submit', function() {
+            document.getElementById('loading-spinner').style.display = 'inline-block';
+        });
+
+        window.addEventListener('load', function() {
+            var spinner = document.getElementById('loading-spinner');
+            if (spinner) {
+                spinner.style.display = 'none';
+            }
+        });
+
+        // JavaScript code for displaying selected file name
+        document.getElementById('file').addEventListener('change', function() {
+            var fileName = this.files[0].name;
+            document.getElementById('file-name').textContent = fileName;
+        });
+    </script>
+
+</body>
+
+</html>

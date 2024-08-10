@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Contact Us</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #535048;
+            margin-top: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #44423e;
+            height: fit-content;
+            padding: 18px;
+            width: 100%; /* Full width */
+            position: absolute; /* Position the navbar at the top */
+            top: 0; /* Align to the top of the viewport */
+            left: 0; /* Align to the left of the viewport */
+            box-sizing: border-box; /* Include padding in the width calculation */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar a.logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 25px; /* Adjust the height as needed */
+            width: auto;
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 18px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-icon {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            filter: sepia(100%) saturate(1000%) hue-rotate(180deg) brightness(90%) contrast(80%);        }
+
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            margin-top: 110px;
+            padding: 20px;
+            background-color: #978f83;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); /* Increased shadow blur, spread, and opacity */
+            border-radius: 40px;
+        }
+
+
+        h1 {
+            text-align: center;
+            color: #000000;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 35px;
+        }
+
+        .contact-info, .feedback-form, .social-media {
+            margin: 20px 0;
+            color: #203d44;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 16px;
+        }
+
+        .mono-font {
+            font-family: monospace, sans-serif;
+        }
+
+        h3 {
+            color: #15292d;
+            font-size: 20px;
+        }
+
+        h2{
+            color: #000000;
+            font-size: 20px;
+        }
+
+        .contact-info p, .social-media a {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .feedback-form {
+            position: relative; /* Added for positioning the button */
+            padding: 20px;
+            padding-top: 1px; /* Added padding to ensure spacing */
+            background-color: #5e5b52; /* Added background color for better visibility */
+            border-radius: 10px;
+            max-width: 100%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Reduced shadow blur and opacity */
+        }
+
+        .feedback-form form {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin: 0;
+        }
+
+        .feedback-form label {
+            margin-top: 1px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #000000; /* Changed font color to black */
+        }
+
+        .feedback-form textarea {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #a8a9a9;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%; /* Full width of the container */
+            box-sizing: border-box; 
+            background-color: #a8a9a9;/* Ensures padding is included in width */
+        }
+
+        .feedback-form button {
+            position: absolute; /* Position the button absolutely */
+            bottom: 10px; /* Distance from the bottom of the container */
+            right: 10px; /* Distance from the right of the container */
+            padding: 10px;
+            background-color: #4d8382;
+            width: 80px;
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            box-sizing: border-box;
+            font-family: monospace; /* Ensures padding is included in width */
+        }
+
+        .feedback-form button:hover {
+            background-color: #3b6464;
+        }
+
+        .flash-messages .message {
+            color: #000000; /* Set text color to black */
+            font-family: monospace; /* Set font to monospace */
+            margin-top: 5px;
+            margin-bottom: 5px; /* Add margin-bottom to create space */
+
+        }
+
+        .flash-messages .message.feedback {
+            background-color: #d4edda; /* Background color for feedback messages */
+            color: #155724; /* Text color for success messages */
+        }
+
+        .flash-messages .message.error {
+            background-color: #f8d7da; /* Background color for error messages */
+            color: #721c24; /* Text color for error messages */
+        }
+        
+        .social-media {
+            text-align: left;
+        }
+
+        .social-media a {
+            font-size: 24px; /* Adjust the size of the icons */
+            color: #4f4a41;
+            text-decoration: none;
+            margin: 0 10px; /* Space between icons */
+        }
+
+        .social-media a:hover {
+            color: #393630;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/welcome"><img src="{{ url_for('static', filename='Images/white-logo.png') }}" alt="Logo" class="logo"></a>
+        <ul>
+            <li><a href="/welcome">Test Case Generator</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/profile"><img src="{{ url_for('static', filename='Images/Profile.png') }}" alt="" class="profile-icon"></a></li>
+        </ul>
+    </div>
+    
+    <div class="container">
+        <h1>Contact Us</h1>
+        
+        <div class="contact-info">
+            <h2>Our Contact Information</h2>
+            <p class="mono-font"><strong>Address:</strong> 148, Rajiv Gandhi Salai, Seevaram, Thoraipakkam, Tamil Nadu 600097</p>
+            <p class="mono-font"><strong>Phone:</strong> 044 4344 9000</p>
+            <p class="mono-font"><strong>Email:</strong> global@bahwancybertek.com</p>
+        </div>
+
+        <div class="feedback-form">
+            <h2>Feedback Form</h2>
+            <form action="/submit_feedback" method="post">
+                <label for="feedback" class="mono-font">We value your feedback! Share your thoughts with us.</label>
+                <textarea id="feedback" name="feedback" rows="6" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+            <div class="flash-messages">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="message {{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+
+        <div class="social-media">
+            <h3>Follow Us</h3>
+            <a href="https://twitter.com/bct_digital/" target="_blank">
+                <i class="fa-brands fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/bctdigital/" target="_blank">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://www.youtube.com/channel/UCCSU4XgKmCjj9F03kO1mHbw" target="_blank">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://www.facebook.com/BCT-Digital-103143774603908/" target="_blank">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://www.instagram.com/bct_digital/" target="_blank">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

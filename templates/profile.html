@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #88bdbc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            height: 100vh;
+            padding: 20px;
+            margin-top: 120px;
+            background-color: #254e58;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            margin-left: -600px;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            background-color: #1c3a42;
+            height: 67px;
+            padding: 20px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin: 0 15px;
+        }
+
+        .navbar ul li a {
+            color: #8ab4be;
+            text-decoration: none;
+            font-size: 18px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .header {
+            text-align: left;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .header h3 {
+            font-size: 40px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin-top: 5px;
+            border-bottom: 1px solid #77a4af;
+            padding-bottom: 10px;
+        }
+
+        .header h4 {
+            font-size: 21px;
+            margin-bottom: -1px;
+            margin-top: 33px;
+            color: #bcb8b8;
+            font-weight: bold;
+            font-family: monospace;
+        }
+
+        .header h1 {
+            margin: -10px 0 0 0;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 23px;
+            color: #77a4af;
+        }
+
+        .header p {
+            margin: 20px 0 0 0;
+            color: #addad9;
+            font-family: monospace;
+            font-size: 15px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: calc(100% - 80px);
+        }
+
+        .section {
+            width: 48%;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            border-bottom: 2px solid #77a4af;
+            padding-bottom: 15px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .document-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .document-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #978f83;
+            border: 3px solid #5e5b52;
+            border-radius: 20px;
+        }
+
+        .document-list a {
+            text-decoration: none;
+            color: #000000;
+        }
+
+        .image-container {
+            position: absolute;
+            right: 20px;
+            top: 100px; /* Adjust based on your layout */
+            width: 450px; /* Adjust width as needed */
+            height: auto;
+            margin-right: 75px;
+            margin-top: 90px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px; /* Optional: add some styling to the image */
+        }
+
+        .logout-button {
+            background-color: #254e58;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-left: 180px;
+            margin-top: 100px;
+        }
+
+        .logout-button:hover {
+            background-color: #1c3a42;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="/welcome">Test Case Generator</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h3>Profile</h3>
+            <h1>Welcome, {{ user.name }}</h1>
+            <p>{{ user.email }}</p>
+            <h4>Below is a record of your uploaded and generated files for your convenience:</h4>
+        </div>
+        <div class="content">
+            <div class="section">
+                <h2>Uploaded Files</h2>
+                <ul class="document-list">
+                    {% for file in files %}
+                    <li>
+                        <a href="{{ url_for('download_file', filename=file.uploaded_filename) }}">{{ file.uploaded_filename }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="section">
+                <h2>Generated Files</h2>
+                <ul class="document-list">
+                    {% for file in files %}
+                    <li>
+                        <a href="{{ url_for('download_file', filename=file.generated_filename) }}">{{ file.generated_filename }}</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='Images/profile-logo.png') }}" alt="Profile Image">
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </div>
+</body>
+</html>
